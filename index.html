@@ -5,37 +5,178 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Challenge - DOM</title>
+    <style>
+      html{
+        height: 100%;
+      }
+      body{
+        margin:0;
+        padding:0;
+        min-height:100%;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        background-color: #0d1117;
+      } 
+
+      .card-outer{
+        display:flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 40%;
+        float: left;
+        margin-left: 10px;
+        align-self: center;
+        background-color: rgb(112, 125, 146);
+        border-radius: 10px;
+      }
+
+      .card:hover {
+        background-color: rgb(220, 227, 245);
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        padding: 12px 18px;
+        text-align: center;
+      }
+
+      .header {
+        font-weight:600;
+        margin-bottom: 15px;
+        border: 1px solid #0d1117;
+        padding: 10px;
+        color: #ffff;
+        padding-top: 0;
+        background-color:#0d1117;
+        border-radius: 5px;
+      }
+
+      section.main-input > input {
+        height: 20px;
+        border-radius: 5px;
+      }
+
+      section.main-input > button {
+        position: relative;
+        bottom: 3px;
+      }
+
+      button {
+        padding: 5px 15px;
+        letter-spacing: 1.5pt;
+        font-size: 12px;
+        font-weight:700;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: #0d1117;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 6px #999;
+      }
+
+      button:hover {background-color: rgb(112, 125, 146); color: #0d1117}
+
+      button:active {
+        background-color: rgb(112, 125, 146);
+        box-shadow: 0 5px #666;
+        transform: translateY(1px);
+      }
+
+      section.main-output {
+        padding: 10px;
+        margin-top:15px;
+        text-align: left;
+        border: 1px solid rgb(112, 125, 146);
+        background-color: rgb(112, 125, 146);
+        border-radius: 4px;
+        height: auto;
+        padding-bottom:0;
+      }
+
+      button#todo-reset {
+        float:right;
+      }
+
+      h4,ol,li::after {
+        position: relative;
+        letter-spacing: 1pt;
+        font-weight: 700;
+        bottom: 20px;
+        overflow: auto;
+        color: rgb(220, 227, 245);
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      <!-- TODO: Buatlah sebuah header dengan id todo-title -->
-      <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+      <div class="card-outer">
+        <div class="card">
+          <div class="container">
+            <!-- TODO: Buatlah sebuah header dengan id todo-title -->
+            <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+            <div class="header">
+              <h2 id="todo-title">To-Do List</h2>
+              <span id="todo-subtitle">Today I Need To</span>
+            </div>
 
-      <!-- Section: input -->
-      <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
-      <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
-
-      <!-- Section output -->
-      <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+            <!-- Section: input -->
+            <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
+            <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
+            <section class="main-input">
+              <input type="text" id="todo-input" placeholder="inputkan sesuatu ...">
+              <button id="todo-submit">Create</button>
+            </section>
+            <!-- Section output -->
+            <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+            <section class="main-output">
+              <button id="todo-reset">Clear</button>
+              <h4>Output :</h4>
+              <ol id="todo-output">
+                
+              </ol>
+            </section>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
     <script>
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+      let button = document.getElementById("todo-submit");
+      let input = document.getElementById("todo-input");
+      let output = document.getElementById("todo-output");
+      let reset = document.getElementById("todo-reset")
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler(toDoItem) {
+        if (toDoItem.key === 13 || toDoItem.key === undefined) {
+          const listItem = document.createElement("li")
+          listItem.innerText = input.value
+          output.appendChild(listItem)
+          input.value = ""
+        }
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
+      button.addEventListener("click", fnClickHandler)
+      reset.addEventListener("click", function(e){
+        e.preventDefault()
+        output.removeChild(output.firstElementChild);
+      })
       
       // TODO: register event onkeypress / addEventListener untuk input
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+      input.addEventListener("keypress", fnClickHandler)
     </script>
   </body>
 </html>
