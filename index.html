@@ -160,14 +160,10 @@
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
       function fnClickHandler(toDoItem) {
         if (toDoItem.key === "Enter" || toDoItem.key === undefined) {
-          if (input.value != '') {
-            const listItem = document.createElement("li")
-            listItem.innerText = input.value
-            output.appendChild(listItem)
-            input.value = ""
-          } else {
-            alert("Opps, maaf field harus diisi yaa !")
-          }
+          const listItem = document.createElement("li")
+          listItem.innerText = input.value
+          output.appendChild(listItem)
+          input.value = ""
         }
       }
 
