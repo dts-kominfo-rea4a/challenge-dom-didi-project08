@@ -137,9 +137,9 @@
             <section class="main-output">
               <button id="todo-reset">Clear</button>
               <h4>Output :</h4>
-              <ol id="todo-output">
+              <ul id="todo-output">
                 
-              </ol>
+              </ul>
             </section>
           </div>
         </div>
@@ -158,7 +158,7 @@
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
       function fnClickHandler(toDoItem) {
-        if (toDoItem.key === 13 || toDoItem.key === undefined) {
+        if (toDoItem.key === "Enter" || toDoItem.key === undefined) {
           const listItem = document.createElement("li")
           listItem.innerText = input.value
           output.appendChild(listItem)
